@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spline Embroidery - Quick Launch Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .hub-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .logo-display {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            margin-right: 12px;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .link-card {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f3ff 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .link-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .link-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-card {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0 auto 10px;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .materials-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .materials-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .materials-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .materials-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: inline-block;
+            border: 2px solid #e0e0e0;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .mobile-only {
+                display: block;
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                font-size: 13px;
+                color: #333;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hub-container">
+        <div class="header">
+            <h1>🧵 Spline Embroidery Hub</h1>
+            <p>Loco Logo - Sword of the Spirit</p>
+            <div class="logo-display">⚔️</div>
+            <p style="font-size: 14px; margin-top: 15px;">Create stunning 3D embroidery animations in minutes</p>
+        </div>
+
+        <div class="content">
+            <div class="mobile-only">
+                <strong>📱 Mobile Optimized:</strong> All links work perfectly on Android! Open Spline directly in your browser.
+            </div>
+
+            <!-- Quick Start Section -->
+            <div class="section">
+                <div class="section-title">🚀 Quick Start</div>
+
+                <div class="quick-links">
+                    <a href="https://app.spline.design/" target="_blank" class="link-card">
+                        <div class="link-icon">✨</div>
+                        <div class="link-title">Open Spline</div>
+                        <div class="link-desc">Create new project</div>
+                    </a>
+
+                    <a href="https://raw.githubusercontent.com/MINE-LABBZ/Loco-colo/main/assets/loco-logo.svg" download class="link-card">
+                        <div class="link-icon">⬇️</div>
+                        <div class="link-title">Download Logo</div>
+                        <div class="link-desc">Sword SVG file</div>
+                    </a>
+
+                    <a href="https://docs.spline.design/" target="_blank" class="link-card">
+                        <div class="link-icon">📚</div>
+                        <div class="link-title">Spline Docs</div>
+                        <div class="link-desc">Official guide</div>
+                    </a>
+
+                    <a href="https://www.youtube.com/@spline3d" target="_blank" class="link-card">
+                        <div class="link-icon">▶️</div>
+                        <div class="link-title">Tutorials</div>
+                        <div class="link-desc">YouTube channel</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Setup Steps -->
+            <div class="section">
+                <div class="section-title">📋 Setup Steps (9 Steps to Success)</div>
+
+                <div class="step-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Open Spline</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Import Logo</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Add Fabric</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Create Threads</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <div class="step-title">Add Text</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <div class="step-title">Animate</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">7</div>
+                        <div class="step-title">Add Lights</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">8</div>
+                        <div class="step-title">Set Camera</div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">9</div>
+                        <div class="step-title">Export MP4</div>
+                    </div>
+                </div>
+
+                <a href="https://raw.githubusercontent.com/MINE-LABBZ/Loco-colo/main/docs/SPLINE_SETUP.md" target="_blank" class="cta-button">📖 View Full Setup Guide</a>
+            </div>
+
+            <!-- Features -->
+            <div class="section">
+                <div class="section-title">✨ Project Features</div>
+
+                <div class="feature-grid">
+                    <div class="feature">
+                        <div class="feature-title">⚡ Multi-Layer Threads</div>
+                        <div class="feature-desc">3 layered gold threads for depth and realism</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">🎬 Sequential Animation</div>
+                        <div class="feature-desc">Threads reveal one by one over 5 seconds</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">🔄 Smooth Rotation</div>
+                        <div class="feature-desc">Logo rotates 180° during reveal</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">💡 Professional Lighting</div>
+                        <div class="feature-desc">Directional + ambient lights</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Materials -->
+            <div class="section">
+                <div class="section-title">🎨 Thread Colors & Materials</div>
+
+                <div class="info-box">
+                    Copy these color codes directly into Spline materials
+                </div>
+
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>Material</th>
+                            <th>Color</th>
+                            <th>Hex Code</th>
+                            <th>Roughness</th>
+                            <th>Use For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="color-swatch" style="background: #FFD700;"></span>Gold</td>
+                            <td>#FFD700</td>
+                            <td><code>FFD700</code></td>
+                            <td>0.4</td>
+                            <td>Main threads</td>
+                        </tr>
+                        <tr>
+                            <td><span class="color-swatch" style="background: #D4AF37;"></span>Dark Gold</td>
+                            <td>#D4AF37</td>
+                            <td><code>D4AF37</code></td>
+                            <td>0.4</td>
+                            <td>Layer 2</td>
+                        </tr>
+                        <tr>
+                            <td><span class="color-swatch" style="background: #FFA500;"></span>Orange</td>
+                            <td>#FFA500</td>
+                            <td><code>FFA500</code></td>
+                            <td>0.4</td>
+                            <td>Layer 3</td>
+                        </tr>
+                        <tr>
+                            <td><span class="color-swatch" style="background: #8B0000;"></span>Burgundy</td>
+                            <td>#8B0000</td>
+                            <td><code>8B0000</code></td>
+                            <td>0.4</td>
+                            <td>Text "POWER"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="color-swatch" style="background: #FFFACD;"></span>Cream</td>
+                            <td>#FFFACD</td>
+                            <td><code>FFFACD</code></td>
+                            <td>0.8</td>
+                            <td>Base fabric</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Timeline Reference -->
+            <div class="section">
+                <div class="section-title">⏱️ Animation Timeline</div>
+
+                <div class="code-block">
+Duration: 5 seconds (300 frames at 60 FPS)
+
+0s    ▌ Frame 0    - Gold Layer (Layer 1) begins reveal
+      └─ Opacity: 0% → 100%
+
+1s         ▌ Frame 60   - Dark Gold Layer (Layer 2) begins
+           └─ Opacity: 0% → 100%
+           └─ Z Offset: +0.1
+
+2s              ▌ Frame 120  - Orange Layer (Layer 3) begins
+                └─ Opacity: 0% → 100%
+                └─ Z Offset: +0.2
+
+3s                   ▌ Frame 180  - Text "POWER" appears
+                     └─ Opacity: 0% → 100%
+                     └─ Scale: 0% → 100%
+
+5s ──────────────────────────────────────
+   └─ Continuous: Logo rotates 0° → 180°
+   └─ Easing: Linear (smooth)
+                </div>
+            </div>
+
+            <!-- Export Options -->
+            <div class="section">
+                <div class="section-title">📹 Export Formats</div>
+
+                <div class="feature-grid">
+                    <div class="feature">
+                        <div class="feature-title">MP4 Video</div>
+                        <div class="feature-desc">1920x1080 @ 60fps, 15-20 MB, best quality</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">WebM Video</div>
+                        <div class="feature-desc">1920x1080 @ 60fps, 5-10 MB, web-optimized</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">GIF Animation</div>
+                        <div class="feature-desc">1920x1080, 2-5 MB, social media</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">PNG Sequence</div>
+                        <div class="feature-desc">300 frames, 50+ MB, frame editing</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="section">
+                <div class="section-title">📚 Resources & Links</div>
+
+                <div class="quick-links">
+                    <a href="https://app.spline.design/" target="_blank" class="link-card">
+                        <div class="link-icon">🎨</div>
+                        <div class="link-title">Spline Editor</div>
+                        <div class="link-desc">Create projects</div>
+                    </a>
+
+                    <a href="https://docs.spline.design/animation" target="_blank" class="link-card">
+                        <div class="link-icon">⏱️</div>
+                        <div class="link-title">Animation Docs</div>
+                        <div class="link-desc">Timeline guide</div>
+                    </a>
+
+                    <a href="https://docs.spline.design/materials" target="_blank" class="link-card">
+                        <div class="link-icon">✨</div>
+                        <div class="link-title">Materials Guide</div>
+                        <div class="link-desc">Shader reference</div>
+                    </a>
+
+                    <a href="https://spline.design/community" target="_blank" class="link-card">
+                        <div class="link-icon">👥</div>
+                        <div class="link-title">Community</div>
+                        <div class="link-desc">Discord & forums</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="section">
+                <a href="https://app.spline.design/" target="_blank" class="cta-button">
+                    🚀 START CREATING NOW
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Loco Logo Embroidery Effect | Spline 3D Project Hub</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/MINE-LABBZ/Loco-colo" target="_blank">GitHub Repository</a> • 
+                <a href="https://github.com/MINE-LABBZ/Loco-colo/blob/main/docs/SPLINE_SETUP.md" target="_blank">Full Guide</a>
+            </p>
+            <p style="margin-top: 10px; opacity: 0.7;">Works on desktop, tablet, and Android mobile browsers</p>
+        </div>
+    </div>
+</body>
+</html>
